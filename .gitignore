@@ -1,0 +1,156 @@
+# =============================================================================
+# Data Analysis Agent - files that must not be committed
+# =============================================================================
+
+# --- Secrets and local configuration -----------------------------------------
+# Keep .env.example in Git, but never commit real environment files.
+.env
+.env.*
+!.env.example
+*.env
+secrets/
+.secrets/
+credentials/
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+service-account*.json
+credentials*.json
+
+# --- User data and generated analysis artifacts ------------------------------
+# Uploaded datasets may contain private/business data. Keep only placeholders.
+data/**
+!data/.gitkeep
+!data/**/
+!data/**/.gitkeep
+
+# Generated reports, charts, exports, and temporary analysis results.
+outputs/**
+!outputs/.gitkeep
+!outputs/**/
+!outputs/**/.gitkeep
+reports/
+exports/
+artifacts/
+
+# Generated test fixtures and reports (source test code remains tracked).
+tests/day3_output/
+tests/day3_llm_output/
+tests/**/outputs/
+tests/**/reports/
+
+# Local backup/snapshot directories.
+backup*/
+backups/
+README_DAY45.md
+*.bak
+*.backup
+*.orig
+*.tmp
+*.temp
+*~
+
+# --- Logs, runtime state, and local databases --------------------------------
+*.log
+logs/
+*.pid
+*.pid.lock
+*.seed
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+
+# --- Python environments and caches ------------------------------------------
+.venv/
+.venv_*/
+.venv-broken*/
+venv/
+venv_*/
+venv-broken*/
+env/
+ENV/
+.conda/
+.pixi/
+__pycache__/
+*.py[cod]
+*$py.class
+.python-version
+pip-log.txt
+pip-delete-this-directory.txt
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.pytype/
+.hypothesis/
+.tox/
+.nox/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.cache/
+
+# --- Packaging and build outputs ---------------------------------------------
+build/
+dist/
+site/
+*.egg-info/
+.eggs/
+*.egg
+pip-wheel-metadata/
+wheels/
+MANIFEST
+
+# --- Notebooks ---------------------------------------------------------------
+.ipynb_checkpoints/
+
+# --- LLM/data-science model and experiment artifacts -------------------------
+checkpoints/
+models/
+runs/
+wandb/
+mlruns/
+lightning_logs/
+*.ckpt
+*.safetensors
+*.pt
+*.pth
+*.onnx
+*.joblib
+*.pkl
+*.pickle
+
+# --- IDE/editor settings ------------------------------------------------------
+.idea/
+.vscode/
+*.code-workspace
+*.sublime-project
+*.sublime-workspace
+
+# --- Operating-system metadata -----------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# --- Frontend/tooling caches (safe if added later) ----------------------------
+node_modules/
+.npm/
+.yarn/
+.pnpm-store/
+.next/
+.nuxt/
+.vite/
+.parcel-cache/
+*.tsbuildinfo
