@@ -25,6 +25,7 @@ from .trend import analyze_time_trend
 from .visualization import generate_business_charts
 from .common import read_dataframe
 
+#定义报告生成格式
 BLUE = RGBColor(46, 116, 181); DARK = RGBColor(31, 77, 120)
 
 
@@ -41,7 +42,7 @@ def _font(run, size=12, bold=False, color=None, font_name="宋体"):
 def _shade(cell, fill):
     tc_pr = cell._tc.get_or_add_tcPr(); shd = OxmlElement("w:shd"); shd.set(qn("w:fill"), fill); tc_pr.append(shd)
 
-
+#调用模型以及模型要求
 def _create_report_llm() -> ChatOpenAI:
     """创建专门用于报告解读的阿里云 Qwen 客户端。"""
     api_key = os.getenv("DASHSCOPE_API_KEY", "").strip()
@@ -62,7 +63,7 @@ def _create_report_llm() -> ChatOpenAI:
         **kwargs,
     )
 
-
+#prompt设计及处理模型输出
 def _ask_qwen(model: ChatOpenAI, subject: str, evidence: dict[str, Any]) -> str:
     """只根据压缩后的统计证据生成约 200 字中文解读。"""
     prompt = f"""你是企业经营数据分析师。请解读“{subject}”。
@@ -125,7 +126,7 @@ def _setup(doc):
     header = section.header.paragraphs[0]; header.text = "企业经营数据分析报告"; header.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     for run in header.runs: _font(run, 9, False, RGBColor(100,100,100))
 
-
+#引用tool完成报告书写，分模块解释
 @tool
 def generate_word_report(file_path: str, output_path: str, company_name: str = "示例企业",
                          date_column: str | None = None, sales_column: str | None = None,

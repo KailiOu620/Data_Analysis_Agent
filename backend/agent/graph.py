@@ -17,6 +17,7 @@ TOOLS = [load_dataset, check_data_quality, descriptive_statistics, calculate_bus
 
 
 def build_agent(model: Any):
+    #把tool的名称参数，描述告诉大模型
     model_with_tools = model.bind_tools(TOOLS)
     def llm_call(state: AnalysisAgentState) -> dict:
         response = model_with_tools.invoke([SystemMessage(content=SYSTEM_PROMPT.format(file_path=state["file_path"])), *state["messages"]])
